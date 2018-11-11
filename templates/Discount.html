@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="/static/style.css" type="text/css">
+<style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        tr:nth-child(odd) {
+            background-color: #8b95a5;
+        }
+
+</style>
+{% block body %}
+<form action="/discount" method="POST">
+	<div class="login">
+		<div class="login-screen">
+			<div class="app-title">
+				<h1>Enter Discount Amount</h1>
+			</div>
+ 
+			<div class="login-form">
+                <div class="control-group">
+                <input type="text" class="login-field" value="" placeholder="Discount" name="discount">
+                <label class="login-field-icon fui-user" for="login-name"></label>
+                </div>
+                <br>
+                <input type="submit" value="Confirm" class="btn btn-primary btn-large btn-block" > <br>
+			</div>
+		</div>
+	</div>
+</form>
+<table>
+        <tr>
+          <th>Item</th>
+          <th>Units</th>
+          <th>Price</th>
+          <th>Subtotal</th>
+        </tr>
+        {% for item in billItems %}
+        <tr>
+          <td>{{item.name}}</td>
+          <td>{{item.units}}</td>
+          <td>{{item.price}}</td>
+          <td>{{item.total}}</td>
+        </tr>
+        {% endfor %}
+{% endblock %}

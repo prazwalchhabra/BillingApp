@@ -1,0 +1,77 @@
+<link rel="stylesheet" href="/static/style.css" type="text/css">
+<style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        tr:nth-child(odd) {
+            background-color: #8b95a5;
+        }
+
+</style>
+{% block body %}
+<form action="/addMore" method="POST">
+	<div class="login">
+		<div class="login-screen">
+			<div class="app-title">
+				<h1>Make Bill</h1>
+			</div>
+ 
+			<div class="login-form">
+
+                <div class="control-group">
+				<select class="login-field" style="width:250px" placeholder="item" name="item">
+                {% for item in items %}
+                <option value="{{item.name}}">{{item.name}}</option>
+                {% endfor %}
+				</select>
+				<label class="login-field-icon fui-lock" for="login-pass"></label>
+                </div>
+                
+                <div class="control-group">
+                <input type="text" class="login-field" value="" placeholder="Units" name="units">
+                <label class="login-field-icon fui-user" for="login-name"></label>
+                </div>
+                <br>
+                <input type="submit" value="Add More" class="btn btn-primary btn-large btn-block" > <br>
+                <a href="/mrpItem" style="text-decoration:none">Add an Item priced as per MRP</a> <br><br>
+                <a href="/addCustomItem" style="text-decoration:none">Add a Custom Item</a> <br><br>
+                <a href="/invoice" style="text-decoration:none">Proceed To Checkout</a> <br><br>
+                <a href="/" style="text-decoration:none">Home</a> <br>
+                <br>
+
+			</div>
+		</div>
+	</div>
+</form>
+<table>
+        <tr>
+          <th>Item</th>
+          <th>Units</th>
+          <th>Price</th>
+          <th>Subtotal</th>
+          <th>&nbsp;</th>          
+        </tr>
+        {% set count = 0 %}
+        {% for item in billItems %}
+        <tr>
+          <td>{{item.name}}</td>
+          <td>{{item.units}}</td>
+          <td>{{item.price}}</td>
+          <td>{{item.total}}</td>
+          <td><a href='/removeItem/{{count}}'>Remove</a></td>
+        </tr>
+        {% set count = count + 1 %}
+        {% endfor %}
+{% endblock %}

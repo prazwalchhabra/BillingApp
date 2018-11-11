@@ -1,0 +1,59 @@
+<link rel="stylesheet" href="/static/style.css" type="text/css">
+<style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        tr:nth-child(odd) {
+            background-color: #8b95a5;
+        }
+
+</style>
+{% block body %}
+<form action="/addNewMrpItem" method="POST">
+	<div class="login">
+		<div class="login-screen">
+			<div class="app-title">
+				<h1>Add New MRP Item</h1>
+			</div>
+ 
+			<div class="login-form">
+				
+				<div class="control-group">
+				<input type="text" class="login-field" value="" placeholder="Name Of Food Item" name="name">
+				<label class="login-field-icon fui-user" for="login-name"></label>
+				</div>
+ 
+				<input type="submit" value="Add New MRP Item" class="btn btn-primary btn-large btn-block" > <br>
+                <a href="/" style="text-decoration:none">Home</a> <br>
+
+			</div>
+		</div>
+	</div>
+</form>
+<table>
+		<tr>
+			<th colspan="2" style="text-align: center;"> Existing Products </th>
+		</tr>
+		<tr>
+          <th>Item</th>
+        </tr>
+	
+		{% for item in MrpItems %}
+        <tr>
+          <td>{{item.name}}</td>
+        </tr>
+        {% endfor %}
+
+{% endblock %}
